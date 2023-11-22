@@ -11,7 +11,6 @@ import {
   OutlinedInput,
   Select,
   TextField,
-  TextareaAutosize,
   Typography,
   stepperClasses,
   IconButton,
@@ -309,7 +308,7 @@ export const TrainerAdd = () => {
 
                 <Grid item xs={12} >
                   
-                    <TextareaAutosize
+                    {/* <TextareaAutosize
                       style={{
                         borderColor:"#c4c4c4",
                         padding: 10,
@@ -319,7 +318,7 @@ export const TrainerAdd = () => {
                       minRows={4}
                       maxRows={5}
                       placeholder="Work Experience– 500 words"
-                    />
+                    /> */}
                   
                 </Grid>
 

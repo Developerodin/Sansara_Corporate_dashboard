@@ -26,7 +26,7 @@ import LockOpenIcon from '@mui/icons-material/LockOpen';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import EvStationIcon from '@mui/icons-material/EvStation';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import TextareaAutosize from '@mui/base/TextareaAutosize';
+
 const column=[
     {name:"Name"},
     {name:"Type"},
@@ -285,12 +285,12 @@ const ChargerDetails = () => {
       <CardContent>
       <Typography variant='h5' fontWeight="bold">Utilisation Summary</Typography>
 
-      <TextareaAutosize
+      {/* <TextareaAutosize
       aria-label="minimum height"
       minRows={10}
       placeholder="Summary....."
       style={{ width:"100%",marginTop:"20px"}}
-    />
+    /> */}
           
       </CardContent>
      

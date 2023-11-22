@@ -11,7 +11,6 @@ import {
   OutlinedInput,
   Select,
   TextField,
-  TextareaAutosize,
   Typography,
   stepperClasses,
   IconButton,
@@ -222,7 +221,7 @@ export const CorporateUsersAdd = () => {
 
                 <Grid item xs={12} >
                   <div>
-                    <TextareaAutosize
+                    {/* <TextareaAutosize
                       style={{
                         width:`${!isMobile ? "100%" : "93%"}`,
                          borderColor:"#c4c4c4",
@@ -232,7 +231,7 @@ export const CorporateUsersAdd = () => {
                       minRows={4}
                       maxRows={5}
                       placeholder="Describe Health Issues here"
-                    />
+                    /> */}
                   </div>
                 </Grid>
 

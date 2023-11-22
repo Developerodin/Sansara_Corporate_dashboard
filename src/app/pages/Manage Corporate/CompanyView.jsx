@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardContent, Stack, TextField, TextareaAutosize, Typography } from '@mui/material'
+import { Box, Button, Card, CardContent, Stack, TextField, Typography } from '@mui/material'
 import React from 'react'
 import { ThemColor } from '../../Them/ThemColor'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -26,7 +26,7 @@ export const CompanyView = () => {
         <Stack spacing={4}>
           <TextField   label="Name" variant="outlined" />
           <TextField  type='file'   variant="outlined" />
-          <TextareaAutosize minRows={15}  label="Description" variant="outlined"/>
+          {/* <TextareaAutosize minRows={15}  label="Description" variant="outlined"/> */}
         </Stack>
         </Box>
         

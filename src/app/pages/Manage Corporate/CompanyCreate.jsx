@@ -11,7 +11,6 @@ import {
   OutlinedInput,
   Select,
   TextField,
-  TextareaAutosize,
   Typography,
   stepperClasses,
   IconButton,
