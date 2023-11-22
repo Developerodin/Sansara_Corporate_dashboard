@@ -55,7 +55,8 @@ const AuthLayout = () => {
       {/* begin::Aside */}
       <div
         className='d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-1 order-lg-2'
-        style={{backgroundImage: `url(${toAbsoluteUrl('/media/misc/auth-bg.png')})`}}
+        // backgroundImage: `url(${toAbsoluteUrl('/media/misc/pattern-2.png')})`
+        style={{backgroundColor:"#FEFAE0"}}
       >
         {/* begin::Content */}
         <div className='d-flex flex-column flex-center py-15 px-5 px-md-15 w-100'>
@@ -75,7 +76,7 @@ const AuthLayout = () => {
 
           {/* begin::Title */}
           <h1 className='text-white fs-2qx fw-bolder text-center mb-7 '>
-          Yoga is the inquiry into the deep mysteries of sentience
+          {/* Yoga is the inquiry into the deep mysteries of sentience */}
           </h1>
           {/* end::Title */}
 
