@@ -12,8 +12,8 @@ const TablesWidget5: React.FC<Props> = ({className}) => {
       {/* begin::Header */}
       <div className='card-header border-0 pt-5'>
         <h3 className='card-title align-items-start flex-column'>
-          <span className='card-label fw-bold fs-3 mb-1'>Latest Products</span>
-          <span className='text-muted mt-1 fw-semibold fs-7'>More than 400 new products</span>
+          <span className='card-label fw-bold fs-3 mb-1'>Latest Classes</span>
+          <span className='text-muted mt-1 fw-semibold fs-7'>More than 20 new classes</span>
         </h3>
         <div className='card-toolbar'>
           <ul className='nav'>

@@ -72,6 +72,7 @@ import { TrainerView } from '../pages/ManageTrainers/TrainerView'
 import { TrianersProfiels } from '../pages/Manage Corporate/TrianersProfiels'
 import Information from '../pages/Manage Client/Complains/Information'
 import LiveClasses from '../pages/Manage Client/User List/LiveClasses'
+import { TrainersProfielView } from '../pages/Manage Corporate/TrainersProfielView'
 
 
 
@@ -160,10 +161,10 @@ const PrivateRoutes = () => {
         />
 
 <Route
-          path='trainer_view/*'
+          path='trainers-profile/trainer_view/:id'
           element={
             <SuspensedView>
-              <TrainerView />
+              <TrainersProfielView />
             </SuspensedView>
           }
         />
@@ -177,32 +178,7 @@ const PrivateRoutes = () => {
           }
         />
 
-<Route
-          path='add_categorie/*'
-          element={
-            <SuspensedView>
-              <CompanyCreate />
-            </SuspensedView>
-          }
-        />
 
-<Route
-          path='add_product/*'
-          element={
-            <SuspensedView>
-              <CorporateUsersAdd />
-            </SuspensedView>
-          }
-        />
-
-<Route
-          path='add_trainer/*'
-          element={
-            <SuspensedView>
-              <TrainerAdd />
-            </SuspensedView>
-          }
-        />
 
 {/* Internal Cpos */}
 

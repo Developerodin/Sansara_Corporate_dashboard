@@ -2,17 +2,9 @@
 import {FC, useState} from 'react'
 import {toAbsoluteUrl, KTSVG} from '../../../helpers'
 import BookmarkIcon from '@mui/icons-material/Bookmark';
-type Props = {
-  color?: string
-  avatar?: string
-  online?: boolean
-  name: string
-  job: string
-  totalExperience: string
-  totalClasses: string
-}
 
-const Card3: FC<Props> = ({
+
+const Card3 = ({
   color = '',
   avatar = '',
   online = false,
@@ -20,6 +12,8 @@ const Card3: FC<Props> = ({
   job,
   totalExperience,
   totalClasses,
+  Fun,
+  id
 }) => {
 
   const [BookmarkClick,setBookMarkClick] = useState(false);
@@ -75,7 +69,7 @@ const Card3: FC<Props> = ({
           Book Class
           {/* <KTSVG path='/media/icons/duotune/arrows/arr075.svg'  className='svg-icon-3 mt-5' /> */}
         </a>
-        <a href='#' className='btn btn-sm btn-dark' >
+        <a  onClick={()=>{Fun(id)}} className='btn btn-sm btn-dark' >
           
           View Profile
           {/* <KTSVG path='/media/icons/duotune/arrows/arr075.svg'  className='svg-icon-3 mt-5' /> */}
