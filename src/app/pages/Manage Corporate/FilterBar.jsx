@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Button, Popover, Slider, Typography } from '@mui/material';
 import { ThemColor } from '../../Them/ThemColor';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import TuneIcon from '@mui/icons-material/Tune';
 const FilterBar = ({ selectedFilters, onFilterChange }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -34,7 +35,7 @@ const FilterBar = ({ selectedFilters, onFilterChange }) => {
           style={{backgroundColor:`${ThemColor.buttons}`,marginLeft:"10px"}}
           onClick={handleClick}
         >
-          <ArrowDropDownIcon/>
+          <TuneIcon/>
         </Button>
         <Popover
           id={id}
@@ -49,32 +50,37 @@ const FilterBar = ({ selectedFilters, onFilterChange }) => {
             vertical: 'top',
             horizontal: 'left',
           }}
+          style={{border: '1px solid red'}}
         >
-          <Box p={2}>
-            <Typography gutterBottom>Experience</Typography>
-            <Slider
-              value={selectedFilters.experience}
-              onChange={handleExperienceChange}
-              valueLabelDisplay="auto"
-              step={1}
-              marks={[
-                { value: 1, label: '1 year' },
-                { value: 2, label: '2 years' },
-                { value: 3, label: '3 years' },
-                { value: 4, label: '4 years' },
-                { value: 5, label: '5 years' },
-              ]}
-              max={5}
-            />
-            <Typography gutterBottom>Category</Typography>
-            <Button onClick={() => handleCategoryChange('Hatha Yoga')}>
-              Hatha Yoga
-            </Button>
-            <Button onClick={() => handleCategoryChange('Vinyasa Yoga')}>
-              Vinyasa Yoga
-            </Button>
-            {/* Add more category buttons as needed */}
+           <Box p={2} style={{borderRadius:"10px",width:"400px",marginTop:"20px"}}>
+          <Typography gutterBottom>Experience</Typography>
+          <Box style={{ width: '90%', margin: 'auto' }}> 
+          <Slider
+            value={selectedFilters.experience}
+            onChange={handleExperienceChange}
+            valueLabelDisplay="auto"
+            step={1}
+            marks={[
+              { value: 1, label: '1 year' },
+              { value: 2, label: '2 years' },
+              { value: 3, label: '3 years' },
+              { value: 4, label: '4 years' },
+              { value: 5, label: '5 years' },
+            ]}
+            max={5}
+           
+          />
           </Box>
+          
+          <Typography gutterBottom>Category</Typography>
+          <Button onClick={() => handleCategoryChange('Hatha Yoga')}>
+            Hatha Yoga
+          </Button>
+          <Button onClick={() => handleCategoryChange('Vinyasa Yoga')}>
+            Vinyasa Yoga
+          </Button>
+          {/* Add more category buttons as needed */}
+        </Box>
         </Popover>
       </Box>
     </div>

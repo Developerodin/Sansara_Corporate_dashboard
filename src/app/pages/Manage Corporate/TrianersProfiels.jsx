@@ -178,20 +178,12 @@ export const TrianersProfiels = () => {
          />
              </Box>
          </Box>
- 
-             <Box style={{marginLeft:"20px"}} >
-           
-              
-               <Button  onClick={handleFilterButtonClick} variant='contained' style={{backgroundColor:`${ThemColor.buttons}`}}>
-                 <TuneIcon />
-               </Button>
-             </Box>
-             {isFilterBarOpen && (
+         
         <FilterBar
           selectedFilters={selectedFilters}
           onFilterChange={handleFilterChange}
         />
-      )}
+     
             
            </Box>
 
