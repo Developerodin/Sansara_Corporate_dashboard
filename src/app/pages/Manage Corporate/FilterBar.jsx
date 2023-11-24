@@ -49,10 +49,14 @@ const FilterBar = ({ selectedFilters, onFilterChange }) => {
           transformOrigin={{
             vertical: 'top',
             horizontal: 'left',
+            
           }}
-          style={{border: '1px solid red'}}
+         
+          PaperProps={{
+            style: { marginTop: '10px' },
+          }}
         >
-           <Box p={2} style={{borderRadius:"10px",width:"400px",marginTop:"20px"}}>
+           <Box p={2} style={{borderRadius:"10px",width:"400px"}}>
           <Typography gutterBottom>Experience</Typography>
           <Box style={{ width: '90%', margin: 'auto' }}> 
           <Slider
