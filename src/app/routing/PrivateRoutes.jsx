@@ -685,7 +685,7 @@ const PrivateRoutes = () => {
 {
           userPermisson.PrivateChat && (
             <Route
-          path='chats/private-chat/*'
+          path='trainers-profile/trainer_view/:id/chats/*'
           element={
             <SuspensedView>
               <Private/>

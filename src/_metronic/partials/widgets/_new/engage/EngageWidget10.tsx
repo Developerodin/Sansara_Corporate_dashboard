@@ -18,7 +18,7 @@ const EngageWidget10 = ({className}: Props) => (
       <div className='mb-10'>
         <div className='fs-2hx fw-bold text-gray-800 text-center mb-13'>
           <span className='me-2'>
-            INTERCHARGE
+            Join Event 
             <br />
             <span className='position-relative d-inline-block text-danger'>
               <Link
@@ -26,13 +26,13 @@ const EngageWidget10 = ({className}: Props) => (
                 className='text-danger
               opacity-75-hover'
               >
-                EV charging services 
+                Online Morning Yoga - 
               </Link>
 
               <span className='position-absolute opacity-15 bottom-0 start-0 border-4 border-danger border-bottom w-100'></span>
             </span>
           </span>
-          to EV drivers
+          short and sweet 30mins
         </div>
 
         {/* <div className='text-center'>

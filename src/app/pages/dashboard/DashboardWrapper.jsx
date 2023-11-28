@@ -11,7 +11,8 @@ import {
   CardsWidget20,
   MixedWidget2,
   ChartsWidget3,
-  ChartsWidget6
+  ChartsWidget6,
+  EngageWidget10
 } from '../../../_metronic/partials/widgets'
 import { ChartsWidget170 } from './ChartsWidget170'
 import { AllChargersMap } from './AllChargersMap'
@@ -47,7 +48,7 @@ const DashboardPage = ({users}) => (
    	
 
     <div className='row g-5 g-xl-10' style={{marginTop:"10px"}}>
-      <div className='col-md-12 col-lg-12 col-xl-12 col-xxl-6 ' >
+      <div className='col-md-12 col-lg-12 col-xl-12 col-xxl-3 ' >
         {/* mb-md-5 mb-xl-10 */}
       <CardsWidget20
           className=' mb-5'
@@ -74,7 +75,7 @@ const DashboardPage = ({users}) => (
       </div>
 
      
-      <div className='col-md-12 col-lg-12 col-xl-12 col-xxl-6 ' >
+      <div className='col-md-12 col-lg-12 col-xl-12 col-xxl-3 ' >
         <div className="row">
         <div className='col-md-6 col-lg-6 col-xl-6 col-xxl-12 mb-md-5  '>
         
@@ -88,7 +89,9 @@ const DashboardPage = ({users}) => (
         </div>    
       </div>
 
-	  
+      <div className='col-xxl-6'>
+        <EngageWidget10 className='h-md-100' />
+      </div>
     </div>
     {/* end::Row */}
     <div className='row gy-5 g-xl-8' style={{marginTop:"20px"}}>

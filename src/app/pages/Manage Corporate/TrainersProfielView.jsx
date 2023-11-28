@@ -3,9 +3,10 @@ import { ChartsWidget1, ListsWidget5, TablesWidget1, TablesWidget5 } from '../..
 import {KTSVG, toAbsoluteUrl} from '../../../_metronic/helpers'
 import { Link, useParams } from 'react-router-dom'
 import { Dropdown1 } from '../../../_metronic/partials'
-
+import { useNavigate } from 'react-router-dom';
 export const TrainersProfielView = () => {
     const {id}= useParams();
+    const navigate = useNavigate();
   const Data = [
     {
       id:1,
@@ -117,7 +118,9 @@ export const TrainersProfielView = () => {
     },
   ];
   const [ProfileData,setProfileData] = useState(null);
-
+   const handelChatClick=()=>{
+    navigate("chats/")
+   }
   useEffect(()=>{
    const ProfileDataFilter = Data.filter((el)=>{
         return el.id === parseInt(id)
@@ -184,7 +187,7 @@ export const TrainersProfielView = () => {
                 
                   <a
                     href='#'
-                    className='d-flex align-items-center text-gray-400 text-hover-primary mb-2'
+                    className='d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2'
                   >
                     <KTSVG
                       path='/media/icons/duotune/communication/com011.svg'
@@ -192,6 +195,18 @@ export const TrainersProfielView = () => {
                     />
                     {ProfileData && ProfileData.name}@gmail.com
                   </a>
+
+                  <span
+                  
+                    onClick={handelChatClick}
+                    className='d-flex align-items-center text-gray-400 text-hover-primary mb-2 me-3'
+                  >
+                    <KTSVG
+                      path='/media/icons/duotune/communication/com003.svg'
+                      className='svg-icon-4 me-1'
+                    />
+                    Chat
+                  </span>
                 </div>
               </div>
 
@@ -248,23 +263,23 @@ export const TrainersProfielView = () => {
          
 
           <div className='row mb-7'>
-            <label className='col-lg-4 fw-bold text-muted'>
+            {/* <label className='col-lg-4 fw-bold text-muted'>
               Contact Phone
               <i
                 className='fas fa-exclamation-circle ms-1 fs-7'
                 data-bs-toggle='tooltip'
                 title='Phone number must be active'
               ></i>
-            </label>
-
+            </label> */}
+{/* 
             <div className='col-lg-8 d-flex align-items-center'>
               <span className='fw-bolder fs-6 me-2'>044 3276 454 935</span>
 
               <span className='badge badge-success'>Verified</span>
-            </div>
+            </div> */}
           </div>
 
-          <div className='row mb-7'>
+          {/* <div className='row mb-7'>
             <label className='col-lg-4 fw-bold text-muted'>Company Site</label>
 
             <div className='col-lg-8'>
@@ -272,7 +287,7 @@ export const TrainersProfielView = () => {
                 keenthemes.com
               </a>
             </div>
-          </div>
+          </div> */}
 
           <div className='row mb-7'>
             <label className='col-lg-4 fw-bold text-muted'>
@@ -289,13 +304,13 @@ export const TrainersProfielView = () => {
             </div>
           </div>
 
-          <div className='row mb-7'>
+          {/* <div className='row mb-7'>
             <label className='col-lg-4 fw-bold text-muted'>Communication</label>
 
             <div className='col-lg-8'>
               <span className='fw-bolder fs-6 text-dark'>Email, Phone</span>
             </div>
-          </div>
+          </div> */}
 
           <div className='row mb-10'>
             <label className='col-lg-4 fw-bold text-muted'>Allow Changes</label>
@@ -332,12 +347,15 @@ export const TrainersProfielView = () => {
           <ChartsWidget1 className='card-xxl-stretch mb-5 mb-xl-10' />
         </div>
 
-        <div className='col-xl-6'>
+        {/* <div className='col-xl-6'>
           <TablesWidget1 className='card-xxl-stretch mb-5 mb-xl-10' />
+        </div> */}
+          <div className='col-xl-6'>
+          <ListsWidget5 className='card-xxl-stretch mb-5 mb-xl-10' />
         </div>
       </div>
 
-      <div className='row gy-10 gx-xl-10'>
+      {/* <div className='row gy-10 gx-xl-10'>
         <div className='col-xl-6'>
           <ListsWidget5 className='card-xxl-stretch mb-5 mb-xl-10' />
         </div>
@@ -345,7 +363,7 @@ export const TrainersProfielView = () => {
         <div className='col-xl-6'>
           <TablesWidget5 className='card-xxl-stretch mb-5 mb-xl-10' />
         </div>
-      </div>
+      </div> */}
     </>
   )
 }
