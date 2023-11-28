@@ -111,17 +111,17 @@ const DashboardPage = ({users}) => (
 
     {/* begin::Row */}
     <div className='row gy-5 gx-xl-8' style={{marginTop:"20px"}}>
-      <div className='col-md-12'>
+      <div className='col-md-6'>
         <ChartsWidget3 className='card-xl-stretch mb-xl-8'/>
       </div>
-      {/* <div className='col-md-6'>
+      <div className='col-md-6'>
         <PieWidgetDashboard className='card-xl-stretch mb-xl-8'/>
-      </div> */}
+      </div>
     </div>
 
-    <div className='row gy-5 gx-xl-8' style={{marginTop:"20px"}}>
+    {/* <div className='row gy-5 gx-xl-8' style={{marginTop:"20px"}}>
       <div className='col-md-12'>
-       {/* <ChartsWidget6 className='card-xl-stretch mb-xl-8'/> */}
+     
        <KTCard>
         <div style={{padding:"10px",textAlign:"center",marginBottom:"30px"}}>
         <p style={{fontSize:"24px",fontWeight:"bold",color:"#7C93C3"}}>
@@ -133,7 +133,7 @@ const DashboardPage = ({users}) => (
        </KTCard>
        <GenralTabel column={column} rows={rows} />
       </div>
-    </div>
+    </div> */}
 
 	
    

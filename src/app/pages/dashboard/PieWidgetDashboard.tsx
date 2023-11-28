@@ -6,17 +6,17 @@ type Props = {
   }
 
 const dataMock = [
-    { title: 'Profit', value: 40, color: '#F1F1F1' },
+    { title: 'Low Effective Session', value: 40, color: '#F1F1F1' },
    
-    { title: 'Trianer Cost', value: 60, color: '#DCE2C8' },
+    { title: 'Effective Sessions', value: 60, color: '#DCE2C8' },
     
   ];
 
   const dataMock2 = [
-    { title: 'Category 1', value: 30, color: '#FFC700' },
-    { title: 'Category 4', value: 20, color: '#7239EA' },
-    { title: 'Category 2', value: 10, color: '#1B9A8B'  },
-    { title: 'Category 5', value: 40, color: '#D83F31'  },
+    { title: 'Depression', value: 30, color: '#FFC700' },
+    { title: 'Sciatica', value: 20, color: '#7239EA' },
+    { title: 'Insomnia', value: 10, color: '#1B9A8B'  },
+    { title: 'Backproblem', value: 40, color: '#D83F31'  },
   ];
   
 const defaultLabelStyle = {
@@ -31,9 +31,8 @@ const PieWidgetDashboard: React.FC<Props> = ({className}) =>{
       {/* begin::Header */}
       <div className='card-header border-0 pt-5'>
         <h3 className='card-title align-items-start flex-column'>
-          <span className='card-label fw-bold fs-3 mb-1'>Users & Transactions Share</span>
+          <span className='card-label fw-bold fs-3 mb-1'>Health Issues Progress</span>
 
-          <span className='text-muted fw-semibold fs-7'> user and revenue pie chart</span>
         </h3>
         </div>
       {/* end::Header */}
@@ -41,7 +40,7 @@ const PieWidgetDashboard: React.FC<Props> = ({className}) =>{
       <div className='card-body'>  
       <div className="row justify-content-around" >
         <div className="col-sm-4 " >
-          <p style={{fontWeight:"bold"}}>User Market Share</p>
+          <p style={{fontWeight:"bold"}}>Total Sessions</p>
           <div >
           <div>
           <PieChart
@@ -72,7 +71,7 @@ const PieWidgetDashboard: React.FC<Props> = ({className}) =>{
             
         </div>
         <div className="col-sm-4">
-          <p style={{fontWeight:"bold"}}>Revenue Market Share</p>
+          <p style={{fontWeight:"bold"}}>Progress</p>
           <div>
           <PieChart
             data={dataMock2}

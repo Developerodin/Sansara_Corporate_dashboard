@@ -114,7 +114,7 @@ const ProfileHeader = () => {
                       <div className='fs-2 fw-bolder'>80%</div>
                     </div>
 
-                    <div className='fw-bold fs-6 text-gray-400'>Contribute</div>
+                    <div className='fw-bold fs-6 text-gray-400'>Attendance</div>
                   </div>
 
                   <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
@@ -129,17 +129,7 @@ const ProfileHeader = () => {
                     <div className='fw-bold fs-6 text-gray-400'>Evs</div>
                   </div>
 
-                  <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
-                    {/* <div className='d-flex align-items-center'>
-                      <KTSVG
-                        path='/media/icons/duotune/arrows/arr066.svg'
-                        className='svg-icon-3 svg-icon-success me-2'
-                      />
-                      {/* <div className='fs-2 fw-bolder'>60%</div> */}
-                    {/* </div> */}
-
-                    <div className='fw-bold fs-6 text-gray-400'></div>
-                  </div>
+                 
                 </div>
               </div>
 

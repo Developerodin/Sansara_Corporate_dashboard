@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import { AddCircle } from '@mui/icons-material';
 import { Overview } from '../../modules/profile/components/Overview';
 import { ProfileHeader } from '../../modules/profile/ProfileHeader';
+import { ProfileDetails } from '../../modules/accounts/components/settings/cards/ProfileDetails';
 const column = [
   { name: "ID" },
   { name: "Name" },
@@ -40,6 +41,7 @@ export const MyProfileMain = () => {
   return (
    <Box >
     <ProfileHeader/>
+    <ProfileDetails/>
         <Overview/>
    </Box>
   )

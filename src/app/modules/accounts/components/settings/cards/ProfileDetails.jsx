@@ -155,7 +155,7 @@ useEffect(() => {
         </div>
       </div>
 
-      <div id='kt_account_profile_details' className='collapse show'>
+      <div id='kt_account_profile_details' className='collapse show' style={{padding:"15px"}}>
 
         
 
@@ -164,22 +164,11 @@ useEffect(() => {
         noValidate
         id='kt_login_signup_form'
         onSubmit={formik.handleSubmit}
+       
       >
-        {/* begin::Heading */}
-        <div className='text-center mb-11'>
-          {/* begin::Title */}
-          
-          {/* end::Title */}
-  
-          {/* <div className='text-gray-500 fw-semibold fs-6'>Your Social Campaigns</div> */}
-        </div>
-        {/* end::Heading */}
-  
-        {/* begin::Login options */}
-        
-        {/* end::Login options */}
-        <div >
-              <label className='col-lg-4 col-form-label fw-bold fs-6'>Avatar</label>
+      
+        <div style={{marginTop:"-5px"}}>
+              {/* <label className='col-lg-4 col-form-label fw-bold fs-6'>Avatar</label> */}
               <div className='col-lg-8'>
                 <div
                   className='image-input image-input-outline'
@@ -203,7 +192,7 @@ useEffect(() => {
         )}
   
         {/* begin::Form group Firstname */}
-        <div className='fv-row mb-8'>
+        <div className='fv-row mb-8 mt-4'>
           <label className='form-label fw-bolder text-dark fs-6'>First name</label>
           <input
             placeholder='First name'
