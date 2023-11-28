@@ -21,13 +21,14 @@ const EngageWidget10 = ({className}: Props) => (
             Join Event 
             <br />
             <span className='position-relative d-inline-block text-danger'>
-              <Link
-                to='/#'
+              <a
+                href='https://samsarawellness.in/events/'
                 className='text-danger
               opacity-75-hover'
+              target='blank'
               >
                 Online Morning Yoga - 
-              </Link>
+              </a>
 
               <span className='position-absolute opacity-15 bottom-0 start-0 border-4 border-danger border-bottom w-100'></span>
             </span>

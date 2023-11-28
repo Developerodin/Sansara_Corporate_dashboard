@@ -6,9 +6,9 @@ type Props = {
   }
 
 const dataMock = [
-    { title: 'Low Effective Session', value: 40, color: '#F1F1F1' },
+    { title: 'Low Effective', value: 40, color: '#F1F1F1' },
    
-    { title: 'Effective Sessions', value: 60, color: '#DCE2C8' },
+    { title: 'Effective', value: 60, color: '#DCE2C8' },
     
   ];
 
