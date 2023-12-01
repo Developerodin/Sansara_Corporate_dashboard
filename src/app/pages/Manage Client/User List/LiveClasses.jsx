@@ -52,7 +52,14 @@ const LiveClasses = () => {
          plugins={[dayGridPlugin]}
          events={events}
          eventColor={"#" + Math.floor(Math.random() * 16777215).toString(16)}
-         
+         eventClick= {(info)=> {
+          alert('Event: ' + info.event.title);
+          alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
+          alert('View: ' + info.view.type);
+      
+          // change the border color just for fun
+          info.el.style.borderColor = 'grey';
+        }}
         
       />
         </CardContent>
