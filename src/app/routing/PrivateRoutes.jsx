@@ -18,6 +18,7 @@ import { TrianersProfiels } from "../pages/Manage Corporate/TrianersProfiels";
 import Information from "../pages/Manage Client/Complains/Information";
 import LiveClasses from "../pages/Manage Client/User List/LiveClasses";
 import { TrainersProfielView } from "../pages/Manage Corporate/TrainersProfielView";
+import { ZoomMeeetingRoom } from "../pages/Manage Client/User List/ZoomMeeetingRoom";
 
 const PrivateRoutes = () => {
   const { userPermisson } = useContext(UserContext);
@@ -83,6 +84,15 @@ const PrivateRoutes = () => {
           element={
             <SuspensedView>
               <LiveClasses />
+            </SuspensedView>
+          }
+        />
+
+<Route
+          path="live-classes/zoom-meeting/*"
+          element={
+            <SuspensedView>
+              <ZoomMeeetingRoom />
             </SuspensedView>
           }
         />

@@ -27,6 +27,7 @@ import { useFormik } from "formik";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import events from "./Events";
+import HostMeeting from './HostMeeting'
 // import timeGridPlugin from "@fullcalendar/timegrid";
 
 // import "@fullcalendar/core/main.css";
@@ -36,7 +37,15 @@ import events from "./Events";
 
 
 const LiveClasses = () => {
-  
+  const navigate = useNavigate();
+  const[ShowVideo,setShowVideo] = useState(false)
+  const [ZoomMeetingNumber,setZoomMeetingNumber] = useState({
+    number:"",
+    pass:""
+  });
+  const handelZoomMeeting = ()=>{
+    navigate(`zoom-meeting/`, { state: { ZoomMeetingNumber } });
+  }
   return (
     <div>
       <Card style={{borderRadius:"20px"}}>
@@ -54,9 +63,9 @@ const LiveClasses = () => {
          eventColor={"#" + Math.floor(Math.random() * 16777215).toString(16)}
          eventClick= {(info)=> {
           alert('Event: ' + info.event.title);
-          alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
-          alert('View: ' + info.view.type);
-      
+          // alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
+          // alert('View: ' + info.view.type);
+          handelZoomMeeting();
           // change the border color just for fun
           info.el.style.borderColor = 'grey';
         }}
@@ -65,6 +74,7 @@ const LiveClasses = () => {
         </CardContent>
       </Card>
  
+ <HostMeeting setZoomMeetingNumber={setZoomMeetingNumber}/>
  </div>
   )
 }
