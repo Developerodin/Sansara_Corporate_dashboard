@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ZoomMtgEmbedded from '@zoomus/websdk/embedded';
 import axios from 'axios';
 import { Base_url } from '../../../Config/BaseUrl';
+import { Button } from '@mui/material';
 const KJUR = require('jsrsasign')
 
 
@@ -57,7 +58,24 @@ var SECRET="C7Dm4JuZ2QXoN0bM2OYTw5JxZvjPK1y9"
 
     let meetingSDKElement = document.getElementById('meetingSDKElement');
 
-    client.init({zoomAppRoot: meetingSDKElement, language: 'en-US'}).then(() => {
+    client.init({zoomAppRoot: meetingSDKElement, language: 'en-US',
+    customize: {
+      video: {
+        isResizable: true,
+        viewSizes: {
+          default: {
+            width: 1300,
+            height: 600
+          },
+          ribbon: {
+            width: 700,
+            height: 700,
+          }
+        }
+      }
+    }
+  
+  }).then(() => {
       client.join({
         signature: signature,
         sdkKey: sdkKey,
@@ -230,37 +248,50 @@ var SECRET="C7Dm4JuZ2QXoN0bM2OYTw5JxZvjPK1y9"
 
   return (
     <div className="App">
-      <main>
-        <h1>Zoom Meeting SDK Sample React app new Host Metting</h1>
+      <main style={{marginTop:"30px"}}>
+        <h1>Admin Control (testing)</h1>
 
         {/* For Component View */}
        
-        <div id="meetingSDKElement" style={{border:"1px solid red"}}>
+        <div id="meetingSDKElement">
           {/* Zoom Meeting SDK Component View Rendered Here */}
         </div>
-<div>
-      <button style={{marginLeft:"30px"}} onClick={createZoomMeeting}>Create Zoom Meeting</button>
-      {meetingNumberMain && <p>Meeting Number: {meetingNumberMain}</p>}
+
+
+        <div style={{display:"flex",justifyContent:"left",alignItems:"center",marginTop:"30px"}}>
+        <Button variant='outlined'  onClick={handleOuthAccessToken}>Access Token</Button>
+        
+        {userToken &&
+        <div>
+      
+        <Button variant='outlined' style={{marginLeft:"30px"}} onClick={createZoomMeeting}>Create Zoom Meeting</Button>
+      
     </div>
-{
-    userToken && <button onClick={getSignature}>Join Meeting</button>
 }
+    
+{
+    userToken && <Button variant='outlined' style={{marginLeft:"30px"}} onClick={getSignature}>Join Meeting</Button>
+}
+        </div>
+
         
 
-        <button style={{marginLeft:"30px"}} onClick={handleOuthAccessToken}>Access Token</button>
+        
       
       {/* <button style={{marginLeft:"30px"}} onClick={fetchZoomTokenServerOauth}>Zak Token</button> */}
       
       </main>
-
+           <div style={{marginTop:"30px"}}>
+           {meetingNumberMain && <p>Meeting Number: {meetingNumberMain}</p>}
+           </div>
       <div>
          {
-          OauthuserToken && <p>Access Token : {OauthuserToken}</p>
+          OauthuserToken && <p>Access Token : {`${OauthuserToken.slice(0,20)}`}...</p>
          }
     </div>
     <div>
          {
-          userToken && <p> Zak Token :{userToken}</p>
+          userToken && <p> Zak Token  : {`${userToken.slice(0,20)}`}...</p>
          }
     </div>
     </div>
