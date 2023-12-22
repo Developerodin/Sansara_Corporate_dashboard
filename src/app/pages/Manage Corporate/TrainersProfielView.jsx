@@ -9,6 +9,8 @@ import { KTSVG, toAbsoluteUrl } from "../../../_metronic/helpers";
 import { Link, useParams } from "react-router-dom";
 import { Dropdown1 } from "../../../_metronic/partials";
 import { useNavigate } from "react-router-dom";
+import { Base_url } from "../../Config/BaseUrl";
+import axios from "axios";
 export const TrainersProfielView = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -123,6 +125,7 @@ export const TrainersProfielView = () => {
     },
   ];
   const [ProfileData, setProfileData] = useState(null);
+  const [teacherData, setTeacherData] = useState(null);
   const handelChatClick = () => {
     navigate("chats/");
   };
@@ -133,6 +136,20 @@ export const TrainersProfielView = () => {
     // console.log("Data =>",ProfileDataFilter)
     setProfileData(ProfileDataFilter[0]);
   }, []);
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`${Base_url}api/teacher/${id}`);
+
+      if (response.status === 200) {
+        setTeacherData(response.data.data.teacher);
+      } else {
+        console.error('Error fetching data:', response.data.message);
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error.message);
+    }
+  };
+
   return (
     <>
       <div className="card mb-5 mb-xl-10">
