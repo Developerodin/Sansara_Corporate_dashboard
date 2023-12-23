@@ -174,18 +174,20 @@ export function Login() {
       </div> */}
       {/* end::Separator */}
 
-      {formik.status ? (
+      {/* {formik.status ? (
         <div className='mb-lg-15 alert alert-danger'>
           <div className='alert-text font-weight-bold'>{formik.status}</div>
         </div>
-      ) : (
+      )
+      
+      : (
         <div className='mb-10 bg-light-info p-8 rounded'>
           <div className='text-info'>
             Use account <strong>admin121@gmail.com</strong> and password <strong>admin123</strong> to
             continue.
           </div>
         </div>
-      )}
+      )} */}
 
       {/* begin::Form group */}
       <div className='fv-row mb-8'>
@@ -246,7 +248,7 @@ export function Login() {
         <div />
 
         {/* begin::Link */}
-        <Link to='/auth/forgot-password' className='link-primary'>
+        <Link to='/auth/forgot-password' style={{color:"orange"}}>
           Forgot Password ?
         </Link>
         {/* end::Link */}
@@ -258,9 +260,10 @@ export function Login() {
         <button
           type='submit'
           id='kt_sign_in_submit'
-          className='btn btn-primary'
+          className='btn btn-warning'
           disabled={formik.isSubmitting || !formik.isValid}
           onClick={handelDashboard}
+          style={{backgroundColor:"orange"}}
         >
           {!loading && <span className='indicator-label'>Continue</span>}
           {loading && (

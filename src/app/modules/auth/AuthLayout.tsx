@@ -34,15 +34,15 @@ const AuthLayout = () => {
         <div className='d-flex flex-center flex-wrap px-5'>
           {/* begin::Links */}
           <div className='d-flex fw-semibold text-primary fs-base'>
-            <a href='#' className='px-5' target='_blank'>
+            <a href='#' className='px-5 ' target='_blank' style={{color:"orange"}}>
               Terms
             </a>
 
-            <a href='#' className='px-5' target='_blank'>
+            <a href='#' className='px-5' target='_blank' style={{color:"orange"}}>
               Plans
             </a>
 
-            <a href='#' className='px-5' target='_blank'>
+            <a href='#' className='px-5' target='_blank' style={{color:"orange"}}>
               Contact Us
             </a>
           </div>
@@ -56,7 +56,7 @@ const AuthLayout = () => {
       <div
         className='d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-1 order-lg-2'
         // backgroundImage: `url(${toAbsoluteUrl('/media/misc/pattern-2.png')})`
-        style={{backgroundColor:"#FEFAE0",borderRadius:"50px",margin:"30px",border:"0.5px solid orange"}}
+        style={{backgroundColor:"#FEFAE0"}}
       >
         {/* begin::Content */}
         <div className='d-flex flex-column flex-center py-15 px-5 px-md-15 w-100'>
