@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import {
   ChartsWidget1,
@@ -9,8 +10,14 @@ import { KTSVG, toAbsoluteUrl } from "../../../_metronic/helpers";
 import { Link, useParams } from "react-router-dom";
 import { Dropdown1 } from "../../../_metronic/partials";
 import { useNavigate } from "react-router-dom";
-import { Base_url } from "../../Config/BaseUrl";
 import axios from "axios";
+import { Base_url } from "../../Config/BaseUrl";
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Typography } from "@mui/material";
 export const TrainersProfielView = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -23,6 +30,7 @@ export const TrainersProfielView = () => {
       totalClasses: "350",
       job: "Hatha Yoga",
       online: false,
+      color: "primary",
     },
     {
       id: 2,
@@ -129,13 +137,6 @@ export const TrainersProfielView = () => {
   const handelChatClick = () => {
     navigate("chats/");
   };
-  useEffect(() => {
-    const ProfileDataFilter = Data.filter((el) => {
-      return el.id === parseInt(id);
-    });
-    // console.log("Data =>",ProfileDataFilter)
-    setProfileData(ProfileDataFilter[0]);
-  }, []);
   const fetchData = async () => {
     try {
       const response = await axios.get(`${Base_url}api/teacher/${id}`);
@@ -149,7 +150,14 @@ export const TrainersProfielView = () => {
       console.error('Error fetching data:', error.message);
     }
   };
-
+  useEffect(() => {
+    const ProfileDataFilter = Data.filter((el) => {
+      return el.id === parseInt(id);
+    });
+    // console.log("Data =>",ProfileDataFilter)
+    setProfileData(Data[0]);
+    fetchData();
+  }, []);
   return (
     <>
       <div className="card mb-5 mb-xl-10">
@@ -157,11 +165,11 @@ export const TrainersProfielView = () => {
           <div className="d-flex flex-wrap flex-sm-nowrap mb-3">
             <div className="me-7 mb-4">
               <div className="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-                {ProfileData && ProfileData.color ? (
+                {teacherData && ProfileData.color ? (
                   <span
                     className={`symbol-label bg-light-${ProfileData.color} text-${ProfileData.color} fs-5 fw-bolder`}
                   >
-                    {ProfileData.name.charAt(0)}
+                    {teacherData.name.charAt(0)}
                   </span>
                 ) : (
                   ProfileData && (
@@ -172,7 +180,7 @@ export const TrainersProfielView = () => {
                   )
                 )}
 
-                {ProfileData && ProfileData.online ? (
+                {teacherData && teacherData.active ? (
                   <div className="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px"></div>
                 ) : (
                   <div className="position-absolute translate-middle bottom-0 start-100 mb-6 bg-danger rounded-circle border border-4 border-white h-20px w-20px"></div>
@@ -188,7 +196,7 @@ export const TrainersProfielView = () => {
                       href="#"
                       className="text-gray-800 text-hover-primary fs-2 fw-bolder me-1"
                     >
-                      {ProfileData && ProfileData.name}
+                      {teacherData && teacherData.name}
                     </a>
                     <a href="#">
                       <KTSVG
@@ -199,27 +207,7 @@ export const TrainersProfielView = () => {
                   </div>
 
                   <div className="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
-                    <a
-                      href="#"
-                      className="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2"
-                    >
-                      <KTSVG
-                        path="/media/icons/duotune/communication/com006.svg"
-                        className="svg-icon-4 me-1"
-                      />
-                      {ProfileData && ProfileData.job}
-                    </a>
-
-                    <a
-                      href="#"
-                      className="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2"
-                    >
-                      <KTSVG
-                        path="/media/icons/duotune/communication/com011.svg"
-                        className="svg-icon-4 me-1"
-                      />
-                      {ProfileData && ProfileData.name}@gmail.com
-                    </a>
+                  
 
                     <span
                       onClick={handelChatClick}
@@ -261,7 +249,7 @@ export const TrainersProfielView = () => {
                           className="svg-icon-3 svg-icon-success me-2"
                         />
                         <div className="fs-2 fw-bolder">
-                          {ProfileData && ProfileData.totalClasses}
+                          {teacherData && teacherData.attendance.length}
                         </div>
                       </div>
 
@@ -282,43 +270,9 @@ export const TrainersProfielView = () => {
         </div>
 
         <div className="card-body p-9">
-          <div className="row mb-7">
-            {/* <label className='col-lg-4 fw-bold text-muted'>
-              Contact Phone
-              <i
-                className='fas fa-exclamation-circle ms-1 fs-7'
-                data-bs-toggle='tooltip'
-                title='Phone number must be active'
-              ></i>
-            </label> */}
-            {/* 
-            <div className='col-lg-8 d-flex align-items-center'>
-              <span className='fw-bolder fs-6 me-2'>044 3276 454 935</span>
+        
+        
 
-              <span className='badge badge-success'>Verified</span>
-            </div> */}
-          </div>
-
-          <div className="row mb-7">
-            <label className="col-lg-4 fw-bold text-muted">Qualification</label>
-
-            <div className="col-lg-8">
-              <a href="#" className="fw-bold fs-6 text-dark text-hover-primary">
-                MSC,PHD
-              </a>
-            </div>
-          </div>
-
-          <div className="row mb-7">
-            <label className="col-lg-4 fw-bold text-muted">
-              City
-              
-            </label>
-
-            <div className="col-lg-8">
-              <span className="fw-bolder fs-6 text-dark">Jaipur</span>
-            </div>
-          </div>
 
           <div className="row mb-7">
             <label className="col-lg-4 fw-bold text-muted">
@@ -327,48 +281,141 @@ export const TrainersProfielView = () => {
             </label>
 
             <div className="col-lg-8">
-              <span className="fw-bolder fs-6 text-dark">India</span>
+              <span className="fw-bolder fs-6 text-dark">{teacherData && teacherData.country}</span>
             </div>
           </div>
+        <div className="row mb-7">
+            <label className="col-lg-4 fw-bold text-muted">Expertise</label>
 
+            <div className="col-lg-8">
+              <a href="#" className="fw-bold fs-6 text-dark text-hover-primary">
+                {teacherData && 
+                teacherData.expertise.map((el)=>{
+                  return el
+                })
+                }
+              </a>
+            </div>
+          </div>
 
           <div className="row mb-10">
             <label className="col-lg-4 fw-bold text-muted">About</label>
 
             <div className="col-lg-8">
+              {/* {
+                teacherData && teacherData.Address
+              } */}
               <span className="fw-bold fs-6">
-                A dedicated Ph.D. and MSc-trained yoga teacher. Balancing
-                tradition with modern expertise, specializes in therapeutic
-                practices, offering inclusive classes that merge ancient wisdom
-                with evidence-based techniques. With a passion for holistic
-                well-being, creates a nurturing space for self-discovery and
-                healing, tailoring sessions to individual needs. Beyond the mat,
-                extends the benefits of yoga through workshops and community
-                outreach. Join on a journey toward balance, harmony, and the
-                profound well-being that yoga uniquely offers. Namaste 🙏✨
+                {teacherData && teacherData.description} Namaste 🙏✨
               </span>
             </div>
           </div>
 
-          {/* <div className='notice d-flex bg-light-warning rounded border-warning border border-dashed p-6'>
-            <KTSVG
-              path='icons/duotune/general/gen044.svg'
-              className='svg-icon-2tx svg-icon-warning me-4'
-            />
-            <div className='d-flex flex-stack flex-grow-1'>
-              <div className='fw-bold'>
-                <h4 className='text-gray-800 fw-bolder'>We need your attention!</h4>
-                <div className='fs-6 text-gray-600'>
-                  Your payment was declined. To start using tools, please
-                  <Link className='fw-bolder' to='/crafted/account/settings'>
-                    {' '}
-                    Add Payment Method
-                  </Link>
-                  .
-                </div>
-              </div>
+        </div>
+      </div>
+
+
+      <div className="card mb-5 mb-xl-10" id="kt_profile_details_view">
+        <div className="card-header cursor-pointer">
+          <div className="card-title m-0">
+            <h3 className="fw-bolder m-0">Yoga Information</h3>
+          </div>
+        </div>
+
+        <div className="card-body p-9">
+        
+
+          <div className="row mb-7">
+            <label className="col-lg-4 fw-bold text-muted">Qualification</label>
+
+            <div className="col-lg-8">
+              <a href="#" className="fw-bold fs-6 text-dark text-hover-primary">
+              <Accordion style={{marginTop:"-5px",width:"60%"}}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography>View</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+        {teacherData && 
+              teacherData.qualification.map((el,index)=>{
+               
+                return <div>
+                    <p>{el.label} = {el.value}</p>
+                  </div>
+               
+              })
+            }
+        </AccordionDetails>
+      </Accordion>
+            
+              </a>
             </div>
-          </div> */}
+          </div>
+
+          <div className="row mb-7">
+            <label className="col-lg-4 fw-bold text-muted">Additional courses </label>
+
+            <div className="col-lg-8">
+              <a href="#" className="fw-bold fs-6 text-dark text-hover-primary">
+              <Accordion style={{marginTop:"-5px",width:"60%"}}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography>View</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+        {teacherData && 
+              teacherData.additional_courses.map((el,index)=>{
+               
+                return <div>
+                    <p>{el.label} = {el.value}</p>
+                  </div>
+               
+              })
+            }
+        </AccordionDetails>
+      </Accordion>
+            
+              </a>
+            </div>
+          </div>
+
+          <div className="row mb-7">
+            <label className="col-lg-4 fw-bold text-muted">Achievements </label>
+
+            <div className="col-lg-8">
+              <a href="#" className="fw-bold fs-6 text-dark text-hover-primary">
+              <Accordion style={{marginTop:"-5px",width:"60%"}}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography>View</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+        {teacherData && 
+              teacherData.achievements.map((el,index)=>{
+               
+                return <div>
+                    <p>{el}</p>
+                  </div>
+               
+              })
+            }
+        </AccordionDetails>
+      </Accordion>
+            
+              </a>
+            </div>
+          </div>
+
+         
         </div>
       </div>
 
@@ -397,3 +444,4 @@ export const TrainersProfielView = () => {
     </>
   );
 };
+

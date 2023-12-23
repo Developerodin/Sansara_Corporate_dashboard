@@ -13,7 +13,8 @@ const Card3 = ({
   totalExperience,
   totalClasses,
   Fun,
-  id
+  id,
+  FunBookNow
 }) => {
 
   const [BookmarkClick,setBookMarkClick] = useState(false);
@@ -49,7 +50,7 @@ const Card3 = ({
           {name}
         </a>
 
-        <div className='fw-bold text-gray-400 mb-6'>{job}</div>
+        <div style={{textAlign:"center",color:"grey",letterSpacing:1,marginBottom:"20px"}}>{job.slice(0,20)}...</div>
 
         <div className='d-flex flex-center flex-wrap mb-5'>
           <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mx-3 mb-3'>
@@ -64,7 +65,7 @@ const Card3 = ({
         </div>
 
 <div className='d-flex flex-center flex-wrap mb-5'>
-<a href='#' className='btn btn-sm btn-dark mr-10' style={{marginRight:20}}>
+<a onClick={()=>FunBookNow(id)} className='btn btn-sm btn-dark mr-10' style={{marginRight:20}}>
           
           Book Class
           {/* <KTSVG path='/media/icons/duotune/arrows/arr075.svg'  className='svg-icon-3 mt-5' /> */}

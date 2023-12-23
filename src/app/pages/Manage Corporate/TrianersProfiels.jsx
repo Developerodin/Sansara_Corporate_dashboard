@@ -1,6 +1,6 @@
 
 import { Box, Button, Card, CardContent, CardHeader, Typography,InputAdornment } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ThemColor } from '../../Them/ThemColor'
 import TuneIcon from '@mui/icons-material/Tune';
 import TextField from '@mui/material/TextField';
@@ -17,128 +17,67 @@ import SearchIcon from '@mui/icons-material/Search';
 import FilterBar from './FilterBar';
 import { Dropdown1 } from '../../../_metronic/partials';
 import { KTSVG } from '../../../_metronic/helpers';
-
+import axios from 'axios';
+import { Base_url } from '../../Config/BaseUrl';
+import Modal from '@mui/material/Modal';
+import Grid from "@mui/material/Grid";
+import CircularProgress from '@mui/material/CircularProgress';
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width:"40%",
+  bgcolor: 'background.paper',
+  boxShadow: 24,
+  height:"40%",
+  p: 4,
+  borderRadius:"24px"
+};
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
 export const TrianersProfiels = () => {
+  const user=JSON.parse(sessionStorage.getItem('User'));
   const navigate = useNavigate();
-
-  const Data = [
-    {
-      id:1,
-      name: 'Emma Smith',
-      avatar: '/media/avatars/300-6.jpg',
-      totalExperience: '5 years',
-      totalClasses: '350',
-      job: 'Hatha Yoga',
-      online: false,
-    },
-    {
-      id:2,
-      name: 'Melody Macy',
-      color: 'danger',
-      totalExperience: '3 years',
-      totalClasses: '150',
-      job: 'Vinyasa Yoga',
-      online: true,
-    },
-    {
-      id:3,
-      name: 'Max Smith',
-      avatar: '/media/avatars/300-1.jpg',
-      totalExperience: '2 years',
-      totalClasses: '90',
-      job: 'Ashtanga Yoga',
-      online: true,
-    },
-    {
-      id:4,
-      name: 'Sean Bean',
-      avatar: '/media/avatars/300-5.jpg',
-      totalExperience: '2 years',
-      totalClasses: '150',
-      job: 'Power Yoga',
-      online: true,
-    },
-    {
-      id:5,
-      name: 'Brian Cox',
-      avatar: '/media/avatars/300-25.jpg',
-      totalExperience: '3 years',
-      totalClasses: '250',
-      job: 'Bikram Yoga',
-      online: true,
-    },
-    {
-      id:6,
-      name: 'Mikaela Collins',
-      color: 'warning',
-      totalExperience: '3 years',
-      totalClasses: '250',
-      job: 'Jivamukti Yoga',
-      online: true,
-    },
-    {
-      id:7,
-      name: 'Francis Mitcham',
-      avatar: '/media/avatars/300-9.jpg',
-      totalExperience: '3 years',
-      totalClasses: '250',
-      job: 'Iyengar Yoga',
-      online: true,
-    },
-    {
-      id:8,
-      name: 'Olivia Wild',
-      color: 'danger',
-      totalExperience: '3 years',
-      totalClasses: '250',
-      job: 'Anusara Yoga',
-      online: true,
-    },
-    {
-      id:9,
-      name: 'Neil Owen',
-      color: 'primary',
-      totalExperience: '3 years',
-      totalClasses: '250',
-      job: 'Sivananda Yoga',
-      online: true,
-    },
-    {
-      id:10,
-      name: 'Dan Wilson',
-      avatar: '/media/avatars/300-23.jpg',
-      totalExperience: '3 years',
-      totalClasses: '250',
-      job: 'Viniyoga',
-      online: true,
-    },
-    {
-      id:11,
-      name: 'Emma Bold',
-      color: 'danger',
-      totalExperience: '3 years',
-      totalClasses: '250',
-      job: 'Kundalini Yoga',
-      online: true,
-    },
-    {
-      id:12,
-      name: 'Ana Crown',
-      avatar: '/media/avatars/300-12.jpg',
-      totalExperience: '3 years',
-      totalClasses: '250',
-      job: 'Yin Yoga',
-      online: true,
-    },
-  ];
-  
-  const [TrainersData,setTrainersData] = useState(Data);
+  const [loading, setLoading] = useState(false);
+  const [TeacherData, setTeacherData] = useState([]);
+  const [update, setupdate] = useState(0);
+  const [filterRows,setFilterRows] = useState([])
   const [isFilterBarOpen, setFilterBarOpen] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState({
     experience: '',
     category: '',
     // Add more filter options if needed
   });
+  const [customSessionData,setCustomSessionData] = useState({
+      teacher:"",
+      user:"",
+      date:"",
+      time:"",
+      message:"",
+
+  })
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = (id) =>{
+    const teacherValue =id;
+  const userValue = user._id
+    setCustomSessionData((prev) => ({
+      ...prev,
+      teacher: teacherValue,
+      user: userValue,
+    }));
+    console.log("Id =>",id)
+    setOpen(true);
+  } 
+  const handleClose = () => setOpen(false);
+
+ const handleChange = (event) => {
+    const { name, value } = event.target;
+    setCustomSessionData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
   const handelViewClick = (id)=>{
     console.log("Id =>",id)
@@ -155,6 +94,50 @@ export const TrianersProfiels = () => {
       [filterType]: value,
     }));
   };
+
+  const createSession = async () => {
+     console.log("Data Book",customSessionData)
+     setLoading(true)
+    try {
+      const response = await axios.post(`${Base_url}api/custom_session`, customSessionData);
+      setCustomSessionData({
+        teacher:"",
+        user:"",
+        date:"",
+        time:"",
+        message:"",
+    })
+    handleClose();
+    alert("Session Booked")
+      return response.data;
+    } catch (error) {
+      alert("Error in booking custom session")
+      setLoading(false)
+      throw error.response ? error.response.data : error.message;
+    }
+  };
+
+  const fetchTeachers = async () => {
+    try {
+      const response = await axios.get(`${Base_url}api/teacher`); // Replace with your actual API endpoint
+      // setUsers(response.data.data.users);
+      const Data= response.data.data.teachers
+      console.log("Trainer Data ==>",Data)
+      if(Data){
+        setTeacherData(Data)
+     setFilterRows(Data);
+
+    
+    
+      }
+    } catch (error) {
+      console.error('Error fetching users:', error.message);
+    }
+  };
+  
+  useEffect(()=>{
+    fetchTeachers();
+  },[update])
   return (
    <Box >
 
@@ -190,19 +173,20 @@ export const TrianersProfiels = () => {
        <Box style={{marginTop:"20px"}}>
        
        <div className='row g-6 g-xl-9'>
-        {Data.map((el,index)=>{
+        {TeacherData.map((el,index)=>{
           return (
             <div key={index} className='col-md-6 col-xxl-4'>
             <Card3
-            color={el.color}
+            color={"primary"}
               avatar={el.avatar}
               name={el.name}
-              job={el.job}
-              totalExperience={el.totalExperience}
-              totalClasses={el.totalClasses}
-              online={el.online}
-              Fun={(id)=>{handelViewClick(id)}}
-              id={el.id}
+              job={el.expertise[0]}
+              totalExperience={"5 years"}
+              totalClasses={el.attendance.length}
+              online={el.status}
+              Fun={(id)=>{handelViewClick(el._id)}}
+              id={el._id}
+              FunBookNow={()=>handleOpen(el._id)}
             />
           </div>
           )
@@ -212,6 +196,89 @@ export const TrianersProfiels = () => {
       </div>
         
        </Box>
+
+
+       <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+        <Grid container spacing={3}>
+              <Grid item xs={6}>
+              <TextField
+              style={{ width: "100%" }}
+        label="Date"
+        name="date"
+        type="date"
+        value={customSessionData.date}
+        onChange={handleChange}
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
+                  </Grid>
+          
+                  <Grid item xs={6}>
+                  <TextField
+                  style={{ width: "100%" }}
+        label="Time"
+        name="time"
+        type="time"
+        value={customSessionData.time}
+        onChange={handleChange}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        inputProps={{
+          step: 300, // 5 minutes
+        }}
+      />
+                  </Grid>
+                
+                  <Grid item xs={12}>
+                  <TextField
+                  style={{ width: "100%" }}
+        label="Message"
+        name="message"
+        multiline
+        rows={4}
+        value={customSessionData.message}
+        onChange={handleChange}
+      />
+                  </Grid>
+                
+
+                <Grid item xs={12}>
+                  <div
+                    style={{
+                      marginTop: "30px",
+                      display: "flex",
+                      justifyContent: "right",
+                    }}
+                  >
+                    
+
+                    <Button
+                      variant="contained"
+                      size="large"
+                      style={{ backgroundColor: "#EE731B" }}
+                      onClick={()=>createSession()}
+                      disabled={loading}
+                    >
+                                          {loading ? (
+        <CircularProgress size={24} color="inherit" />
+      ) : (
+        'Submit'
+      )}
+                    </Button>
+                  </div>
+                </Grid>
+              </Grid>
+        
+        </Box>
+      </Modal>
    </Box>
   )
 }
