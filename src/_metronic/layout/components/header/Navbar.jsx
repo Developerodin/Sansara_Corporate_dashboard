@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import {KTSVG, toAbsoluteUrl} from '../../../helpers'
 import {HeaderNotificationsMenu, HeaderUserMenu, Search, ThemeModeSwitcher} from '../../../partials'
 import {useLayout} from '../../core'
+import { Base_url } from '../../../../app/Config/BaseUrl'
 
 const itemClass = 'ms-1 ms-lg-3'
 const btnClass =
@@ -11,6 +12,7 @@ const btnIconClass = 'svg-icon-1'
 
 const Navbar = () => {
   const {config} = useLayout()
+  const user=JSON.parse(sessionStorage.getItem('User'));
   return (
     <div className='app-navbar flex-shrink-0'>
 
@@ -71,7 +73,20 @@ const Navbar = () => {
           data-kt-menu-attach='parent'
           data-kt-menu-placement='bottom-end'
         >
-          <img src={toAbsoluteUrl('/media/avatars/300-1.jpg')} alt='' />
+           {user && user.images.length === 0 ? (
+                  <span
+                    className={`symbol-label bg-light-primary text-primary fs-5 fw-bolder`}
+                  >
+                    {user.name.charAt(0)}
+                  </span>
+                ) : (
+                  user &&  user.images && (
+                    <img
+                      src={`${Base_url}api/${user.images[0].path}`}
+                      alt="Metronic"
+                    />
+                  )
+                )}
         </div>
         <HeaderUserMenu />
       </div>

@@ -2,6 +2,7 @@
 import React from 'react'
 import {KTSVG, toAbsoluteUrl} from '../../../helpers'
 import {Dropdown1} from '../../content/dropdown/Dropdown1'
+import { Base_url } from '../../../../app/Config/BaseUrl'
 
 
 
@@ -16,7 +17,21 @@ const FeedsWidget6 = ({className,Data}) => {
           <div className='d-flex align-items-center flex-grow-1'>
             {/* begin::Avatar */}
             <div className='symbol symbol-45px me-5'>
-              <img src={toAbsoluteUrl('/media/avatars/300-13.jpg')} alt='' />
+              
+              {Data && Data.teacher.images.length === 0 ? (
+                  <span
+                    className={`symbol-label bg-light-primary text-primary fs-5 fw-bolder`}
+                  >
+                    {Data.teacher.name.charAt(0)}
+                  </span>
+                ) : (
+                  Data.teacher &&  Data.teacher.images && (
+                    <img
+                      src={`${Base_url}api/${Data.teacher.images[0].path}`}
+                      alt="trainer image"
+                    />
+                  )
+                )}
             </div>
             {/* end::Avatar */}
 

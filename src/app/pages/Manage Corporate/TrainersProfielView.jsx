@@ -165,16 +165,16 @@ export const TrainersProfielView = () => {
           <div className="d-flex flex-wrap flex-sm-nowrap mb-3">
             <div className="me-7 mb-4">
               <div className="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-                {teacherData && ProfileData.color ? (
+              {teacherData && teacherData.images.length === 0 ? (
                   <span
                     className={`symbol-label bg-light-${ProfileData.color} text-${ProfileData.color} fs-5 fw-bolder`}
                   >
                     {teacherData.name.charAt(0)}
                   </span>
                 ) : (
-                  ProfileData && (
+                  teacherData &&  teacherData.images && (
                     <img
-                      src={toAbsoluteUrl(`${ProfileData.avatar}`)}
+                      src={`${Base_url}api/${teacherData.images[0].path}`}
                       alt="Metronic"
                     />
                   )
@@ -262,6 +262,36 @@ export const TrainersProfielView = () => {
           </div>
         </div>
       </div>
+
+{
+ teacherData && teacherData.images && teacherData.images.length > 0 &&  <div className="card mb-5 mb-xl-10" id="kt_profile_details_view">
+  <div className="card-header cursor-pointer">
+    <div className="card-title m-0">
+      <h3 className="fw-bolder m-0">Trainer Images</h3>
+    </div>
+  </div>
+
+  <div className="card-body p-9">
+  
+  <div style={{display:"flex",alignItems:"center"}}>
+  { teacherData.images.map((el)=>{
+              return  (
+                <img
+                style={{marginRight:"30px",height:"150px",width:"150px"}}
+                  src={`${Base_url}api/${el.path}`}
+                  alt="Metronic"
+                />
+              )
+            }) 
+          }
+  </div>
+         
+
+  </div>
+</div>
+}
+      
+
       <div className="card mb-5 mb-xl-10" id="kt_profile_details_view">
         <div className="card-header cursor-pointer">
           <div className="card-title m-0">

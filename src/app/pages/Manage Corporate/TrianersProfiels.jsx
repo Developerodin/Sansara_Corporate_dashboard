@@ -177,8 +177,8 @@ export const TrianersProfiels = () => {
           return (
             <div key={index} className='col-md-6 col-xxl-4'>
             <Card3
-            color={"primary"}
-              avatar={el.avatar}
+            color={el.images.length > 0 ? `` : "primary"}
+              avatar={el.images.length > 0 ? `${Base_url}api/${el.images[0].path}` : ""}
               name={el.name}
               job={el.expertise[0]}
               totalExperience={"5 years"}

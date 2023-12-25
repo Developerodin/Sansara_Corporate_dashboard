@@ -6,7 +6,7 @@ import {useFormik} from 'formik'
 import { EditUser } from '../../../../auth/components/EditUser'
 import UserContext from '../../../../../../Context/UserContext'
 import clsx from 'clsx'
-import { BASE_URL } from '../../../../../Config/BaseUrl'
+import { BASE_URL, Base_url } from '../../../../../Config/BaseUrl'
 import axios from 'axios'
 import Alert from '@mui/material/Alert';
 import { Box, Modal } from '@mui/material'
@@ -106,9 +106,9 @@ useEffect(() => {
 
   const fetchUserData = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/users/${user._id}`, { headers: { Authorization: token } });
-      setUserData(response.data);
-      setUserStatus(response.data.status); // Set the user status
+      const response = await axios.get(`${Base_url}api/users/${user._id}`, { headers: { Authorization: token } });
+      setUserData(response.data.data.user);
+      setUserStatus(response.data.data.status); // Set the user status
     } catch (error) {
       console.log('Error fetching user data:', error);
     }
@@ -121,16 +121,14 @@ useEffect(() => {
 useEffect(() => {
     if (userData) {
       // Split the name into first name and last name based on space
-      const [firstName, ...lastNameArr] = userData.name.split(' ');
-      const lastName = lastNameArr.join(' ');
+      
 
       formik.setValues({
-        firstname: firstName,
-        lastname: lastName,
+        firstname: userData.name,
         email: userData.email,
         password: '',
         changepassword: '',
-        role: userData.role,
+        role:"",
       });
     }
   }, [userData]);
@@ -176,10 +174,26 @@ useEffect(() => {
                   style={{backgroundImage: `url(${toAbsoluteUrl('/media/avatars/blank.png')})`}}
                 >
                   <input type='file' />
+                 
                   <div
                     className='image-input-wrapper w-125px h-125px'
-                    style={{backgroundImage: `url(${toAbsoluteUrl(data.avatar)})`}}
-                  ></div>
+                  >
+ {user && user.images.length === 0 ? (
+                  <span
+                    className={`symbol-label bg-light-primary text-primary fs-5 fw-bolder`}
+                  >
+                    {user.name.charAt(0)}
+                  </span>
+                ) : (
+                  user &&  user.images && (
+                    <img
+                    className='image-input-wrapper w-125px h-125px'
+                      src={`${Base_url}api/${user.images[0].path}`}
+                      alt="Metronic"
+                    />
+                  )
+                )}
+                  </div>
                 </div>
               </div>
             </div>
@@ -218,33 +232,7 @@ useEffect(() => {
           )}
         </div>
         {/* end::Form group */}
-        <div className='fv-row mb-8'>
-          {/* begin::Form group Lastname */}
-          <label className='form-label fw-bolder text-dark fs-6'>Last name</label>
-          <input
-            placeholder='Last name'
-            type='text'
-            autoComplete='off'
-            {...formik.getFieldProps('lastname')}
-            className={clsx(
-              'form-control bg-transparent',
-              {
-                'is-invalid': formik.touched.lastname && formik.errors.lastname,
-              },
-              {
-                'is-valid': formik.touched.lastname && !formik.errors.lastname,
-              }
-            )}
-          />
-          {formik.touched.lastname && formik.errors.lastname && (
-            <div className='fv-plugins-message-container'>
-              <div className='fv-help-block'>
-                <span role='alert'>{formik.errors.lastname}</span>
-              </div>
-            </div>
-          )}
-          {/* end::Form group */}
-        </div>
+       
   
         {/* begin::Form group Email */}
         <div className='fv-row mb-8'>
