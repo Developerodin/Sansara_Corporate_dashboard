@@ -24,7 +24,7 @@ const Feeds: FC = () => {
       <div className='col-xl-6'>
         <FeedsWidget5 className='mb-5 mb-xl-8' />
 
-        <FeedsWidget6 className='mb-5 mb-xl-8' />
+       
       </div>
       {/* end::Col */}
     </div>

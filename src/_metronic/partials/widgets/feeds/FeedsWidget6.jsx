@@ -3,11 +3,9 @@ import React from 'react'
 import {KTSVG, toAbsoluteUrl} from '../../../helpers'
 import {Dropdown1} from '../../content/dropdown/Dropdown1'
 
-type Props = {
-  className: string
-}
 
-const FeedsWidget6: React.FC<Props> = ({className}) => {
+
+const FeedsWidget6 = ({className,Data}) => {
   return (
     <div className={`card ${className}`}>
       {/* begin::Body */}
@@ -25,9 +23,9 @@ const FeedsWidget6: React.FC<Props> = ({className}) => {
             {/* begin::Info */}
             <div className='d-flex flex-column'>
               <a href='#' className='text-gray-800 text-hover-primary fs-6 fw-bold'>
-                Mat Dillon
+              {Data.title}  By {Data.teacher ? Data.teacher.name : ""}
               </a>
-              <span className='text-gray-400 fw-semibold'>Last month</span>
+              <span className='text-gray-400 fw-semibold'>{Data.createdAt}</span>
             </div>
             {/* end::Info */}
           </div>
@@ -35,7 +33,7 @@ const FeedsWidget6: React.FC<Props> = ({className}) => {
 
           {/* begin::Menu */}
           <div className='my-0'>
-            <button
+            {/* <button
               type='button'
               className='btn btn-sm btn-icon btn-color-primary btn-active-light-primary'
               data-kt-menu-trigger='click'
@@ -43,8 +41,8 @@ const FeedsWidget6: React.FC<Props> = ({className}) => {
               data-kt-menu-flip='top-end'
             >
               <KTSVG path='/media/icons/duotune/general/gen024.svg' className='svg-icon-2' />
-            </button>
-            <Dropdown1 />
+            </button> */}
+            {/* <Dropdown1 /> */}
           </div>
           {/* end::Menu */}
         </div>
@@ -54,7 +52,7 @@ const FeedsWidget6: React.FC<Props> = ({className}) => {
         <div className='mb-6'>
           {/* begin::Text */}
           <div className='text-gray-800 fs-6 fw-normal mb-5'>
-            Outlines keep you honest. They stop you from indulging in poorly thought-out metaphors
+            {Data.description}
           </div>
           {/* end::Text */}
 
@@ -63,14 +61,12 @@ const FeedsWidget6: React.FC<Props> = ({className}) => {
             <iframe
               title='widget11-video'
               className='embed-responsive-item rounded h-300px w-100'
-              src='https://www.youtube.com/embed/qIHXpnASPAA'
+              src={Data.classRecordingLink}
               allowFullScreen={true}
             />
           </div>
-          {/* end::Video */}
-
-          {/* begin::Toolbar */}
-          <div className='d-flex align-items-center mb-5'>
+        
+          {/* <div className='d-flex align-items-center mb-5'>
             <a
               href='#'
               className='btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-4'
@@ -86,16 +82,12 @@ const FeedsWidget6: React.FC<Props> = ({className}) => {
               <KTSVG path='/media/icons/duotune/general/gen030.svg' className='svg-icon-2' />
               229
             </a>
-          </div>
-          {/* end::Toolbar */}
+          </div> */}
+       
         </div>
-        {/* end::Bottom */}
+    
+        {/* <div className='separator mb-4'></div> */}
 
-        {/* begin::Separator */}
-        <div className='separator mb-4'></div>
-        {/* end::Separator */}
-
-        {/* begin::Reply input */}
         {/* <form className='position-relative mb-6'>
           <textarea
             className='form-control border-0 p-0 pe-10 resize-none min-h-25px'
@@ -117,9 +109,9 @@ const FeedsWidget6: React.FC<Props> = ({className}) => {
             </span>
           </div>
         </form> */}
-        {/* edit::Reply input */}
+     
       </div>
-      {/* end::Body */}
+
     </div>
   )
 }

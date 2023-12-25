@@ -1,6 +1,6 @@
 
 import { Box, Button, Card, CardContent, CardHeader, Typography,InputAdornment } from '@mui/material'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { ThemColor } from '../../Them/ThemColor'
 import TuneIcon from '@mui/icons-material/Tune';
 import TextField from '@mui/material/TextField';
@@ -13,6 +13,9 @@ import { useNavigate } from 'react-router-dom';
 import { AddCircle } from '@mui/icons-material';
 import { FeedsWidget6, ListsWidget2 } from '../../../_metronic/partials/widgets';
 import SearchIcon from '@mui/icons-material/Search';
+import { Base_url } from '../../Config/BaseUrl';
+import axios from 'axios';
+import { toAbsoluteUrl } from '../../../_metronic/helpers';
 const column = [
   { name: "ID" },
   { name: "Name" },
@@ -26,17 +29,32 @@ const column = [
 export const RecordClasses = () => {
 
   const navigate = useNavigate();
-  const handelViewClick=()=>{
-    navigate("/product_view");
-  }
+  const [classes, setClasses] = useState([]);
+  const [update,setupdate] = useState(0)
 
-  const handelAddNew=()=>{
-    navigate("/add_product");
-  }
+  const getAllClasses = async () => {
+    try {
+      const response = await axios.get(`${Base_url}api/recorded-classes`); // Update the API endpoint accordingly
+      
+      const Data = response.data;
+      console.log("REdorder classes",Data)
+      if(Data){
+        const ActiveData = Data.filter((el)=>{
+          return el.status === true;
+        })
+        setClasses(ActiveData);
+      }
+    } catch (error) {
+      console.error('Error fetching classes:', error.message);
+    }
+  };
 
-  const rows = [
-    { Id: "1", Name: "Samar Sharma", Category: "The ODIN", Price:<Button color='success' variant="contained" >Active</Button>, CreatedAt: "04 / Oct / 2023", Action: <RemoveRedEyeIcon onClick={handelViewClick} style={{ color: `${ThemColor.icon}` }} />, Delete: <DeleteIcon color="error" /> },
-  ];
+
+
+  useEffect(() => {
+    // Fetch all classes when the component mounts
+    getAllClasses();
+  }, [update]);
   
   return (
    <Box >
@@ -79,22 +97,20 @@ export const RecordClasses = () => {
        <Box style={{marginTop:"20px"}}>
        
        <div className='row g-5 g-xxl-8'>
-      <div className='col-xl-6'>
-        <FeedsWidget6 className='mb-5 mb-xxl-8' />
-      </div>
+        {
+          classes.length > 0 ? classes.map((el,index)=>{
+            return <div className='col-xl-6' key={index}>
+            <FeedsWidget6 className='mb-5 mb-xxl-8' Data={el} />
+          </div>
+          })
+          :
+          <div style={{textAlign:"center",height:"300px"}} className='col-xl-12'>
+             <img src={toAbsoluteUrl('/media/illustrations/dozzy-1/5-dark.png')} style={{height:"90%"}}  alt='' />
+            <h2>No Recording Found</h2>
+            </div>
+        }
       
-      <div className='col-xl-6'>
-        <FeedsWidget6 className='mb-5 mb-xxl-8' />
-      </div>
-
-      <div className='col-xl-6'>
-        <FeedsWidget6 className='mb-5 mb-xxl-8' />
-      </div>
-
-
-      <div className='col-xl-6'>
-        <FeedsWidget6 className='mb-5 mb-xxl-8' />
-      </div>
+      
       </div>
         
        </Box>
