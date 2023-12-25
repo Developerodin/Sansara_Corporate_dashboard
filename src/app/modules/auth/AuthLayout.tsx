@@ -2,8 +2,10 @@
 import {useEffect} from 'react'
 import {Outlet, Link} from 'react-router-dom'
 import {toAbsoluteUrl} from '../../../_metronic/helpers'
-
+import { Grid } from '@mui/material'
+import "./Login.css"
 const AuthLayout = () => {
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   useEffect(() => {
     const root = document.getElementById('root')
     if (root) {
@@ -19,82 +21,164 @@ const AuthLayout = () => {
   return (
     <div className='d-flex flex-column flex-lg-row flex-column-fluid h-100'>
       {/* begin::Body */}
-      <div className='d-flex flex-column flex-lg-row-fluid w-lg-50 p-10 order-2 order-lg-1'>
+      <div  className={`d-flex flex-column flex-lg-row-fluid w-lg-50 p-10  order-2 order-lg-1 h-100`} id="login_Conatiner">
         {/* begin::Form */}
-        <div className='d-flex flex-center flex-column flex-lg-row-fluid'>
+        <div className='d-flex  flex-column flex-lg-row-fluid h-100'  >
           {/* begin::Wrapper */}
-          <div className='w-lg-500px p-10'>
+          <div className='w-lg-100 h-100 ' >
             <Outlet />
+          
           </div>
           {/* end::Wrapper */}
         </div>
         {/* end::Form */}
 
         {/* begin::Footer */}
-        <div className='d-flex flex-center flex-wrap px-5'>
-          {/* begin::Links */}
-          <div className='d-flex fw-semibold text-primary fs-base'>
-            <a href='#' className='px-5 ' target='_blank' style={{color:"orange"}}>
-              Terms
-            </a>
-
-            <a href='#' className='px-5' target='_blank' style={{color:"orange"}}>
-              Plans
-            </a>
-
-            <a href='#' className='px-5' target='_blank' style={{color:"orange"}}>
-              Contact Us
-            </a>
-          </div>
-          {/* end::Links */}
-        </div>
+        
         {/* end::Footer */}
       </div>
       {/* end::Body */}
 
       {/* begin::Aside */}
       <div
-        className='d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-1 order-lg-2'
-        // backgroundImage: `url(${toAbsoluteUrl('/media/misc/pattern-2.png')})`
-        style={{backgroundColor:"#FEFAE0"}}
+        className='d-flex flex-lg-row-fluid w-lg-100 bgi-size-cover bgi-position-center order-1 order-lg-2'
+        id="container1"
       >
         {/* begin::Content */}
-        <div className='d-flex flex-column flex-center py-15 px-5 px-md-15 w-100'>
-          {/* begin::Logo */}
-          {/* <Link to='/' className='mb-12'>
-            <img alt='Logo' src={toAbsoluteUrl('/media/logos/samsara-logo.png')} className='h-95px' />
-          </Link> */}
-          {/* end::Logo */}
+      
 
-          {/* begin::Image */}
-          <img
-            className='mx-auto w-200px w-md-30 w-xl-200px mb-10 mb-lg-20'
-            src={toAbsoluteUrl('/media/logos/samsara-logo.png')}
-            alt=''
-          />
-          {/* end::Image */}
+        <div 
+         
+        style={{
+          flex: 2,
+         
+          padding: "20px",
+        
+         display: "flex",
+         justifyContent:"center",
+         alignItems:"center"
+          
+        }}
+      >
+        <div>
 
-          {/* begin::Title */}
-          <h1 className='text-white fs-2qx fw-bolder text-center mb-7 '>
-          {/* Yoga is the inquiry into the deep mysteries of sentience */}
-          </h1>
-          {/* end::Title */}
-
-          {/* begin::Text */}
-          {/* <div className='text-white fs-base text-center'>
-          We aim to provide an integrated platform,{' '}
-            <a href='#' className='opacity-75-hover text-warning fw-bold me-1'>
-            that builds a vast network
-            </a>
-            of aggregated chargers to provide access <br /> to numerous eMobility partners.  
+        <div >
+          <Grid container spacing={2}>
+          <Grid item xs={6}>
+              <div
+                style={{
+                  
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "250px"
+                
+                }}
+              >
+                <p
+                  style={{
+                    fontSize: "34px",
+                    letterSpacing: 3,
+                    fontWeight: 500,
+                  }}
+                >
+                  Yoga at Home with Expert Teachers - Live!
+                </p>
+              </div>
+            </Grid>
+          <Grid item xs={6}>
+              <div style={{display:"flex",justifyContent:"center",alignItems:"center" }}>
+                <img
+                  style={{ height: "250px" }}
+                  src="https://res.cloudinary.com/dgerdfai4/image/upload/f_auto/v1572073938/website/lp/hero-image-home.jpg"
+                  alt="img"
+                />
+              </div>
+            </Grid>
             
-            <a href='#' className='opacity-75-hover text-warning fw-bold me-1'>
-            Become a part of the largest EV Community in the country
-            </a>
-            which aims to have <br /> a network of 1,00,000 chargers and over 5 Million EV drivers
-          </div> */}
-          {/* end::Text */}
+            
+          </Grid>
         </div>
+
+        <div style={{ marginTop: "60px" }}>
+          <Grid container spacing={2}>
+          <Grid item xs={6}>
+              <div style={{display:"flex",justifyContent:"center",alignItems:"center"  }}>
+                <img
+                  style={{ height: "250px" }}
+                  src="https://res.cloudinary.com/dgerdfai4/image/upload/f_auto/v1572073938/website/lp/display-one.jpg"
+                  alt="img"
+                />
+              </div>
+            </Grid>
+
+          <Grid item xs={6}>
+              <div
+                style={{
+                
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height:"250px"
+                }}
+              >
+                <p
+                  style={{
+                    fontSize: "34px",
+                    letterSpacing: 3,
+                    fontWeight: 500,
+                  }}
+                >
+                  Elevate Your Practice with Yoga's Best
+                </p>
+              </div>
+            </Grid>
+            
+            
+          </Grid>
+        </div>
+
+       
+
+        
+
+        <div style={{ marginTop: "60px" }}>
+          <Grid container spacing={2}>
+            <Grid item xs={6}>
+              <div
+                style={{
+                 
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height:"250px"
+                }}
+              >
+                <p
+                  style={{
+                    fontSize: "34px",
+                    letterSpacing: 3,
+                    fontWeight: 500,
+                  }}
+                >
+                  The Easy Start <br /> & Stick With It Plan
+                </p>
+              </div>
+            </Grid>
+            <Grid item xs={6}>
+              <div style={{display:"flex",justifyContent:"center",alignItems:"center" }}>
+                <img
+                  style={{ height: "250px" }}
+                  src="https://res.cloudinary.com/dgerdfai4/image/upload/f_auto/v1572073938/website/lp/display-two.jpg"
+                  alt="img"
+                />
+              </div>
+            </Grid>
+          </Grid>
+        </div>
+        {/* Add more content as needed */}
+        </div>
+      </div>
         {/* end::Content */}
       </div>
       {/* end::Aside */}
