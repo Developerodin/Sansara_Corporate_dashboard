@@ -9,6 +9,7 @@ const KJUR = require('jsrsasign')
 
 
 export const ZoomMeeetingRoom = () => {
+  const user=JSON.parse(sessionStorage.getItem('User'));
   const navigate = useNavigate();
   const location = useLocation();
   const { ZoomMeetingNumber } = location.state; 
@@ -19,12 +20,12 @@ export const ZoomMeeetingRoom = () => {
   var meetingNumber =ZoomMeetingNumber.number
   var passWord = ZoomMeetingNumber.pass
   var role = 0
-  var userName = 'Akshay'
-  var userEmail = 'akshay96102@gmail.com'
+  var userName = user.name
+  var userEmail = user.email
   var registrantToken = ''
   var zakToken = ''
   var leaveUrl = 'https://localhost:3000'
-  var userId="akshay96102@gmail.com"
+  var userId=user.email
   var SECRET="C7Dm4JuZ2QXoN0bM2OYTw5JxZvjPK1y9"
   
   function getSignature() {
