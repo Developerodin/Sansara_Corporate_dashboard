@@ -237,7 +237,7 @@ export const TrainersProfielView = () => {
                
                 return <div>
                    { 
-                    index  % 2 === 0 &&  <div style={{height:"30px",backgroundColor:"orange",borderRadius:"20px",display:"flex",justifyContent:"center",alignItems:"center"}}>
+                    index  % 3 === 0 &&  <div style={{height:"30px",backgroundColor:"orange",borderRadius:"20px",display:"flex",justifyContent:"center",alignItems:"center"}}>
                     <p style={{color:"#fff",marginTop:"10px"}}>Additional Courses </p>
                    </div>
                    }
