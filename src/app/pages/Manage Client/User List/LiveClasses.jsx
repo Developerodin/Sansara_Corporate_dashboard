@@ -127,7 +127,7 @@ const LiveClasses = () => {
   function formatApiDataForCalendar(apiData) {
     const EventsData = apiData.map((clazz) => ({
       title: clazz.title,
-      start: new Date(clazz.schedule),
+      start: new Date(),
       end:"",
       extendedProps: {
         description: clazz.description,
