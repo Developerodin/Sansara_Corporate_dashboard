@@ -197,10 +197,11 @@ const LiveClasses = () => {
       <ThemeProvider theme={orangeTheme}>
         <Tabs value={value} onChange={handleChangetabs} aria-label="basic tabs example" textColor="primary"
         indicatorColor="primary"
-       
+        
+
         >
-          <Tab label="table view" {...a11yProps(0)}  style={{backgroundColor:`${value === 0 ? "#EE731B" : "#fff"}`,marginRight:"10px",borderRadius:"10px",marginBottom:"10px"}}/>
-          <Tab label="calendar view" {...a11yProps(1)} style={{backgroundColor:`${value === 1 ? "#EE731B" : "#fff"}`,marginRight:"10px",borderRadius:"10px",marginBottom:"10px"}} />
+          <Tab label="table view" {...a11yProps(0)}  style={{backgroundColor:`${value === 0 ? "#EA6C13" : "#fff"}`,marginRight:"10px",borderRadius:"10px",marginBottom:"10px"}}/>
+          <Tab label="calendar view" {...a11yProps(1)} style={{backgroundColor:`${value === 0 ? "#EA6C13" : "#fff"}`,color:'white',marginRight:"10px",borderRadius:"10px",marginBottom:"10px"}} />
           
         </Tabs>
         </ThemeProvider>
