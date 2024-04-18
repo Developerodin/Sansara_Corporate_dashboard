@@ -30,7 +30,7 @@ const style = {
   width:"40%",
   bgcolor: 'background.paper',
   boxShadow: 24,
-  height:"40%",
+  height:"600px",
   p: 4,
   borderRadius:"24px"
 };
@@ -57,7 +57,10 @@ export const TrianersProfiels = () => {
       message:"",
 
   })
+  const [selectedTimeSlot,setSelectedTimeSlot] = useState("");
+  const [customSessions,setCustomSessions] = useState([])
   const [open, setOpen] = React.useState(false);
+  const [timeSlots, setTimeSlots] = useState([]);
   const handleOpen = (id) =>{
     const teacherValue =id;
   const userValue = user._id
@@ -96,10 +99,18 @@ export const TrianersProfiels = () => {
   };
 
   const createSession = async () => {
-     console.log("Data Book",customSessionData)
+     
+     const Data = {
+      teacher:customSessionData.teacher,
+      user:customSessionData.user,
+      date:customSessionData.date,
+      timeSlot:selectedTimeSlot,
+      message:customSessionData.message,
+     }
+     console.log("Data Book",Data)
      setLoading(true)
     try {
-      const response = await axios.post(`${Base_url}api/custom_session`, customSessionData);
+      const response = await axios.post(`${Base_url}api/custom_session`, Data);
       setCustomSessionData({
         teacher:"",
         user:"",
@@ -107,7 +118,10 @@ export const TrianersProfiels = () => {
         time:"",
         message:"",
     })
+    setSelectedTimeSlot("")
     handleClose();
+    setupdate((prev)=>prev+1)
+    setLoading(false)
     alert("Session Booked")
       return response.data;
     } catch (error) {
@@ -134,10 +148,63 @@ export const TrianersProfiels = () => {
       console.error('Error fetching users:', error.message);
     }
   };
+
+  const fetchTimeSlots = async () => {
+    try {
+      const response = await axios.get(`${Base_url}api/custom_session/time-slots`);  // Assuming your backend API endpoint is '/api/time-slots'
+      setTimeSlots(response.data);
+    } catch (error) {
+      console.error('Error fetching time slots:', error);
+    }
+  };
+
+  const handleTimeSlotClick = (id) => {
+    setSelectedTimeSlot(id);
+  };
+
+  const getAllCustomSessions = async () => {
+    try {
+      const response = await axios.get(`${Base_url}api/custom_session`); // Update the API endpoint accordingly
+      setCustomSessions(response.data);
+      const Data = response.data
+      console.log("Data Class DAta in if  : ",response)
+      
+    } catch (error) {
+      console.error('Error fetching classes:', error.message);
+    }
+  };
+
+  const isTimeSlotDisabled = (timeSlot) => {
+    // Check if the time slot matches any data from the backend
+    const matchingData = customSessions.find(
+      (data) => data.timeSlot._id === timeSlot._id && data.date === customSessionData.date
+    );
+    return matchingData !== undefined; // If matchingData is found, the time slot should be disabled
+  };
   
   useEffect(()=>{
     fetchTeachers();
+    fetchTimeSlots();
+    getAllCustomSessions();
   },[update])
+
+  useEffect(() => {
+    // Fetch data initially
+    getAllCustomSessions();
+
+    // Fetch data every 10 seconds
+    const interval = setInterval(() => {
+      getAllCustomSessions();
+    }, 10000);
+
+    // Clean up interval on component unmount
+    return () => clearInterval(interval);
+  }, []);
+
+  const today = new Date();
+  const minDate = today.toISOString().split('T')[0];
+  const maxDate = new Date(today.setDate(today.getDate() + 10)).toISOString().split('T')[0];
+
   return (
    <Box >
 
@@ -207,8 +274,8 @@ export const TrianersProfiels = () => {
         <Box sx={style}>
         <Grid container spacing={3}>
               <Grid item xs={6}>
-              <TextField
-              style={{ width: "100%" }}
+         <TextField
+        style={{ width: "100%" }}
         label="Date"
         name="date"
         type="date"
@@ -216,25 +283,42 @@ export const TrianersProfiels = () => {
         onChange={handleChange}
         InputLabelProps={{
           shrink: true,
+        }} 
+        inputProps={{
+          min: minDate,
+          max: maxDate
         }}
       />
                   </Grid>
           
-                  <Grid item xs={6}>
-                  <TextField
-                  style={{ width: "100%" }}
-        label="Time"
-        name="time"
-        type="time"
-        value={customSessionData.time}
-        onChange={handleChange}
-        InputLabelProps={{
-          shrink: true,
-        }}
-        inputProps={{
-          step: 300, // 5 minutes
-        }}
-      />
+                  <Grid item xs={12}>
+                  <div style={{display:"flex",justifyContent:'left',alignItems:"center",flexWrap:"wrap",gap:20}}>
+                  {timeSlots.map((el) => (
+        <div
+          key={el._id}
+          onClick={() => handleTimeSlotClick(el._id)}
+          style={{
+            position: "relative",
+            border: "1px solid grey",
+            height: 80,
+            width: 150,
+            borderRadius: 10,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            cursor: "pointer",
+            backgroundColor: isTimeSlotDisabled(el) ? "lightgray" : "white",
+            pointerEvents: isTimeSlotDisabled(el) ? "none" : "auto",
+            opacity: isTimeSlotDisabled(el) ? 0.5 : 1,
+            borderColor: selectedTimeSlot === el._id ? 'green' : 'white',
+          }}
+        >
+          <span>{el.timeRange}</span>
+        </div>
+      ))}
+               
+
+           </div>
                   </Grid>
                 
                   <Grid item xs={12}>
