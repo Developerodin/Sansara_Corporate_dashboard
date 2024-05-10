@@ -112,7 +112,7 @@ const LiveClasses = () => {
     number:data.meeting_number,
     pass:data.password
     }
-    navigate(`zoom-meeting/`, { state: { ZoomMeetingNumber } });
+    navigate(`zoom-cdn/`, { state: { ZoomMeetingNumber } });
   }
 
   const handleChangetabs = (event, newValue) => {
