@@ -95,14 +95,14 @@ const SidebarMenuMain = () => {
            
   
   
-         
+         {/*
               <SidebarMenuItem
               to='information/'
               icon='/media/icons/duotune/abstract/abs026.svg'
               title='Class Information '
               fontIcon='bi-layers'
              
-            />
+            /> */}
           
          
   
